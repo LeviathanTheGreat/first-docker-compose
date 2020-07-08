@@ -18,8 +18,5 @@ COPY src/* ./
 
 EXPOSE 80
 
-#for debug
-RUN echo $(ls /srv)
-
-#                   |prevents process from closing prematurely
+# prevents process from closing prematurely
 CMD node index.js && tail -f /dev/null
