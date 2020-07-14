@@ -7,7 +7,8 @@ ENV MYSQL_USER password
 ENV MYSQL_HOST localhost
 
 
-COPY ./sql-startup-scripts/* ./
+COPY ./sql-startup-scripts/init.sql /docker-entrypoint-initdb.d/
 
 EXPOSE 3306
+
 
