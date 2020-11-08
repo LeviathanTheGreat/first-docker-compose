@@ -2,8 +2,16 @@ version: '3'
 
 
 
+    # Nov.8 2020 | current problem
+    
+    # this is past me, I'm here to say that the current problem
+    # you were facing was regarding connecting to the mysql database
+    #error originate from the 
+    #it's probably an error with my docker-compose.yml or Dockerfile 
+
+
 services:
-  mysql:
+  database:
     image:
       mysql:latest
     command: --default-authentication-plugin=mysql_native_password
@@ -20,7 +28,20 @@ services:
       - MYSQL_HOST=localhost
     ports:
       - 3306:3306
+    expose:
+      - 3306
+
     # #for development
     # stdin_open: true # docker run -i
     # tty: true
-
+  server:
+    build:
+      context: ./src/node-service/
+      dockerfile: Dockerfile
+    container_name: node-server
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "3306:3306"
+    
+      
